@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FADES On POINT • Barbershop in Roma</title>
+    <!-- Font Awesome 6 (free) for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+        }
+
+        body {
+            background: #faf7f2;
+            color: #1e1e1e;
+            line-height: 1.5;
+        }
+
+        /* main container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* header / hero */
+        .hero {
+            background: linear-gradient(145deg, #1e2a2f 0%, #0f1a1f 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 2.5rem 2.5rem 2rem 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,215,140,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: "✂️ 💈";
+            font-size: 8rem;
+            opacity: 0.06;
+            position: absolute;
+            bottom: -20px;
+            right: 10px;
+            transform: rotate(-10deg);
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            filter: drop-shadow(0 4px 6px #00000050);
+        }
+
+        .hero .tagline {
+            font-size: 1.6rem;
+            font-weight: 300;
+            color: #e0e0e0;
+            margin-bottom: 1.8rem;
+            border-left: 5px solid #d4a259;
+            padding-left: 1.2rem;
+        }
+
+        .hero .location-highlight {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            align-items: center;
+            font-size: 1.3rem;
+            background: rgba(255,255,240,0.05);
+            padding: 1.2rem 2rem;
+            border-radius: 60px;
+            backdrop-filter: blur(4px);
+            width: fit-content;
+            border: 1px solid rgba(255,215,140,0.2);
+        }
+
+        .hero .location-highlight i {
+            color: #f6b83e;
+            margin-right: 8px;
+        }
+
+        /* card style for info */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3.5rem;
+        }
+
+        .info-card {
+            background: white;
+            padding: 2rem 1.8rem;
+            border-radius: 2rem;
+            box-shadow: 0 15px 30px -12px rgba(0,0,0,0.2);
+            transition: transform 0.2s ease, box-shadow 0.2s;
+            border: 1px solid #ede6dc;
+            text-align: center;
+        }
+
+        .info-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 25px 35px -14px #b38b5f80;
+        }
+
+        .info-card i {
+            font-size: 2.5rem;
+            background: #1e2a2f;
+            color: #f6c97e;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.4rem auto;
+            box-shadow: 0 10px 10px -5px #b38b5f;
+        }
+
+        .info-card h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: #2c3e4f;
+        }
+
+        .info-card p {
+            font-size: 1.3rem;
+            color: #2c3e4f;
+            font-weight: 500;
+            background: #f5efe8;
+            padding: 0.6rem 1rem;
+            border-radius: 40px;
+            display: inline-block;
+        }
+
+        .info-card .detail {
+            font-size: 1.2rem;
+            color: #4a4a4a;
+            margin-top: 0.8rem;
+        }
+
+        /* contact row — clean extra info */
+        .contact-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2.5rem 4rem;
+            background: #e7ddd0;
+            padding: 1.8rem 2.5rem;
+            border-radius: 80px;
+            margin-bottom: 3rem;
+            font-weight: 500;
+            border: 2px solid #cfb595;
+        }
+
+        .contact-row a {
+            color: #1e2a2f;
+            text-decoration: none;
+            font-size: 1.4rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: color 0.2s;
+        }
+
+        .contact-row a:hover {
+            color: #ac6f2c;
+            text-decoration: underline;
+        }
+
+        .contact-row i {
+            font-size: 1.8rem;
+            color: #8b6c47;
+        }
+
+        /* map container (embedded Roma / Usave complex) */
+        .map-section {
+            background: #ded3c4;
+            border-radius: 2.5rem;
+            padding: 2rem 2rem 1.5rem 2rem;
+            box-shadow: inset 0 -3px 10px rgba(0,0,0,0.1), 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .map-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            color: #1f2b31;
+        }
+
+        .map-title i {
+            color: #b6590f;
+        }
+
+        .map-embed {
+            width: 100%;
+            height: 340px;
+            background: #b6a48f;
+            border-radius: 2rem;
+            overflow: hidden;
+            border: 4px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        /* footer / small note */
+        .footer-note {
+            margin-top: 2.8rem;
+            text-align: center;
+            color: #5b4c3b;
+            font-size: 1.1rem;
+            font-style: italic;
+            border-top: 2px dashed #c9b393;
+            padding-top: 2rem;
+        }
+
+        .footer-note i {
+            color: #a5713c;
+        }
+
+        /* responsive fine-tuning */
+        @media (max-width: 650px) {
+            .hero h1 {
+                font-size: 2.6rem;
+            }
+            .hero .tagline {
+                font-size: 1.3rem;
+            }
+            .hero .location-highlight {
+                font-size: 1.1rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.8rem;
+            }
+            .contact-row {
+                flex-direction: column;
+                align-items: center;
+                border-radius: 50px;
+                gap: 1rem;
+            }
+            .info-card p {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* small extra polish */
+        .btn-fade {
+            background: #d49b6a;
+            color: #121212;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 40px;
+            font-weight: 600;
+        }
+        /* Usave complex mention */
+        .complex-badge {
+            background: #dba870;
+            color: #1f2a2e;
+            padding: 0.3rem 1.2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            display: inline-block;
+            font-size: 1.2rem;
+            margin-left: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HERO section with name and main location -->
+        <div class="hero">
+            <h1>FADES On POINT</h1>
+            <div class="tagline">
+                <i class="fas fa-cut" style="margin-right: 10px;"></i> 
+                sharp fades • clean lines • Roma pride
+            </div>
+            <div class="location-highlight">
+                <span><i class="fas fa-map-pin"></i> Maseru, Roma </span>
+                <span><i class="fas fa-store-alt"></i> Usave complex <span class="complex-badge">(inside)</span></span>
+                <span><i class="fas fa-phone-alt"></i> 5850 5747</span>
+            </div>
+        </div>
+
+        <!-- 3 info cards: contact, location, email -->
+        <div class="info-grid">
+            <!-- Phone card -->
+            <div class="info-card">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>Call / WhatsApp</h3>
+                <p><a href="tel:+26658505747" style="text-decoration: none; color: inherit;">5850 5747</a></p>
+                <div class="detail">🇱🇸 Lesotho mobile</div>
+            </div>
+            <!-- Location card -->
+            <div class="info-card">
+                <i class="fas fa-location-dot"></i>
+                <h3>Visit us</h3>
+                <p>Usave complex</p>
+                <div class="detail">Roma, Maseru — next to Usave entrance</div>
+            </div>
+            <!-- Email card -->
+            <div class="info-card">
+                <i class="fas fa-envelope"></i>
+                <h3>Email</h3>
+                <p><a href="mailto:mosesbeela227@gmail.com" style="text-decoration: none; color: inherit;">mosesbeela227</a></p>
+                <div class="detail">click to send a message</div>
+            </div>
+        </div>
+
+        <!-- prominent contact row with clickable elements -->
+        <div class="contact-row">
+            <a href="tel:+26658505747"><i class="fas fa-phone-square"></i> 5850 5747</a>
+            <a href="mailto:mosesbeela227@gmail.com"><i class="fas fa-envelope-square"></i> mosesbeela227@gmail.com</a>
+            <span><i class="fas fa-map-marked-alt"></i> Usave complex, Roma</span>
+        </div>
+
+        <!-- map section – showing approximate area of Roma / Usave complex -->
+        <div class="map-section">
+            <div class="map-title">
+                <i class="fas fa-map"></i> 
+                <span>📍 Find us @ Usave complex, Roma (Maseru)</span>
+            </div>
+            <div class="map-embed">
+                <!-- interactive map iframe: centered roughly on Roma, Lesotho. Usave complex is a known landmark. 
+                     we use OpenStreetMap via leaflet static, but for pure html we embed a reliable raster with a pin -->
+                <iframe 
+                    src="https://www.openstreetmap.org/export/embed.html?bbox=27.7240%2C-29.4520%2C27.7740%2C-29.4220&layer=mapnik&marker=-29.4370%2C27.7490" 
+                    style="width:100%; height:100%; border:0;"
+                    allowfullscreen="" 
+                    loading="lazy"
+                    title="Map of Roma, Maseru, Usave complex area"
+                ></iframe>
+            </div>
+            <div style="margin-top: 0.8rem; text-align: right; font-size: 1rem; opacity: 0.8;">
+                <i class="fas fa-info-circle"></i> Usave complex, Roma — exactly where the fade is sharp
+            </div>
+        </div>
+
+        <!-- extra details: barbershop atmosphere and mention of FADES On POINT -->
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: 2rem; gap: 1rem;">
+            <div style="display: flex; gap: 15px; align-items: center;">
+                <span style="background: #2f3e46; color: #fcd9b8; padding: 0.4rem 1.5rem; border-radius: 50px; font-weight: 600;">
+                    <i class="fas fa-star"></i> walk‑ins welcome
+                </span>
+                <span style="background: #d6b186; color: #111; padding: 0.4rem 1.5rem; border-radius: 50px;">
+                    <i class="fas fa-wifi"></i> free haircut vibes
+                </span>
+            </div>
+            <div style="font-size: 1.2rem; color: #4e3e2e;">
+                <i class="fas fa-scissors"></i> FADES On POINT – Roma’s finest
+            </div>
+        </div>
+
+        <!-- footer note with email / phone repetition and thanks -->
+        <div class="footer-note">
+            <i class="fas fa-crown" style="margin-right: 8px;"></i> 
+            FADES On POINT — Maseru, Roma @ Usave complex · call 5850 5747 or 
+            <a href="mailto:mosesbeela227@gmail.com" style="color:#4f3800; font-weight: 600;">email us</a> 
+            <br> <span style="font-size: 0.95rem;">✂️ open Tuesday–Saturday 9am–7pm · Lesotho’s fade experts</span>
+        </div>
+    </div>
+
+    <!-- subtle extra: mention email and phone again for crawlers but also style -->
+    <div style="display: none;">contact: mosesbeela227@gmail.com | 58505747 | FADES On POINT, Usave complex, Roma, Maseru, Lesotho</div>
+</body>
+</html>
